@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    PROTECT THIS FILE!
+    Ensure that you set permissions on this file or folder so that only your service account(s) can access it.
+-->
+<Settings>
+    <MySchoolSask>
+        <SFTPHost></SFTPHost>
+        <SFTPUser></SFTPUser>
+        <SFTPPrivateKeyPath></SFTPPrivateKeyPath>
+        <SFTPHostKey></SFTPHostKey>
+    </MySchoolSask>
+    <Utilities>
+        <WinSCPPath></WinSCPPath>
+        <SevenZipPath></SevenZipPath>
+    </Utilities>
+    <Identity>
+        <IdentityScriptsRootPath></IdentityScriptsRootPath>
+        <FacilityFile></FacilityFile>
+        <ConfigFile></ConfigFile>
+    </Identity>
+    <WebHookURL></WebHookURL>
+    <LogFilePassword></LogFilePassword>
+</Settings>
