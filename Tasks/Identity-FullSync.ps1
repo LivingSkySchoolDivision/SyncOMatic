@@ -80,7 +80,7 @@ $WinSCPLogFile = Join-Path $ActualScratchPath "winscp.log"
 # #################################################
 
 foreach($InputFile in $CSVGetFiles) {    
-    . $IdentityScriptsRootPath/Tasks/QuickSync.ps1 -FacilityFile $IdentityFacilityFile -ConfigFile $IdentityConfigFile -InputFile $InputFile -LogFilePath $ActualScratchPath
+    . $IdentityScriptsRootPath/Tasks/FullSync.ps1 -FacilityFile $IdentityFacilityFile -ConfigFile $IdentityConfigFile -InputFile $InputFile -LogFilePath $ActualScratchPath
 }
 
 # #################################################
