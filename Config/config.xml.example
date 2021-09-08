@@ -16,6 +16,12 @@
         <SFTPPassword></SFTPPassword>
         <SFTPHostKey></SFTPHostKey>
     </SchoolMessenger>
+    <Clever>
+        <SFTPHost></SFTPHost>
+        <SFTPUser></SFTPUser>
+        <SFTPPassword></SFTPPassword>
+        <SFTPHostKey></SFTPHostKey>
+    </Clever>
     <Utilities>
         <WinSCPPath></WinSCPPath>
         <SevenZipPath></SevenZipPath>
