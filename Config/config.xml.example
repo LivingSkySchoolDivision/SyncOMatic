@@ -22,6 +22,12 @@
         <SFTPPassword></SFTPPassword>
         <SFTPHostKey></SFTPHostKey>
     </Clever>
+    <Clevr>
+        <SFTPHost></SFTPHost>
+        <SFTPUser></SFTPUser>
+        <SFTPPassword></SFTPPassword>
+        <SFTPHostKey></SFTPHostKey>
+    </Clevr>
     <Utilities>
         <WinSCPPath></WinSCPPath>
         <SevenZipPath></SevenZipPath>
