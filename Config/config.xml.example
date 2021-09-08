@@ -10,6 +10,12 @@
         <SFTPPrivateKeyPath></SFTPPrivateKeyPath>
         <SFTPHostKey></SFTPHostKey>
     </MySchoolSask>
+    <SchoolMessenger>
+        <SFTPHost></SFTPHost>
+        <SFTPUser></SFTPUser>
+        <SFTPPassword></SFTPPassword>
+        <SFTPHostKey></SFTPHostKey>
+    </SchoolMessenger>
     <Utilities>
         <WinSCPPath></WinSCPPath>
         <SevenZipPath></SevenZipPath>
