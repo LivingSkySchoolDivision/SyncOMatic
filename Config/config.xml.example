@@ -28,6 +28,12 @@
         <SFTPPassword></SFTPPassword>
         <SFTPHostKey></SFTPHostKey>
     </Clevr>
+    <Xello>
+        <SFTPHost></SFTPHost>
+        <SFTPUser></SFTPUser>
+        <SFTPPassword></SFTPPassword>
+        <SFTPHostKey></SFTPHostKey>        
+    </Xello>
     <Utilities>
         <WinSCPPath></WinSCPPath>
         <SevenZipPath></SevenZipPath>
