@@ -14,9 +14,24 @@ $CSVGetFiles = @(
     @{ 
         MSSName = "Xello-Student.txt"
         VendorName = "Student.txt"
+    },
+    @{ 
+        MSSName = "Xello-CourseCodes.txt"
+        VendorName = "CourseCodes.txt"
+    },
+    @{ 
+        MSSName = "Xello-StudentCourses-History.txt"
+        VendorName = ""
+    },
+    @{ 
+        MSSName = "Xello-StudentCourses-InProgress.txt"
+        VendorName = "StudentCourses.txt"
     }
 )
 
+# We need to append files together for student enrolments
+$AppendTo = "Xello-StudentCourses-InProgress.txt"
+$AppendFrom = "Xello-StudentCourses-History.txt"
 
 $ActualScratchPath = $(Resolve-Path $ScratchDirectory)
 $ActualLogPath = $(Resolve-Path $LogDirectory)
@@ -74,20 +89,25 @@ foreach($file in $CSVGetFiles) {
 }
 $SFTPCommands += "BYE"
 
-
 $WinSCPLogFile = Join-Path $ActualScratchPath "winscp-mss.log"
 . $WinSCPPath/winscp.com  /command $SFTPCommands /log="$WinSCPLogFile" /loglevel=0
 
+# #################################################
+# Combine two StudentCourse files
+# #################################################
+
+Add-Content -Path $AppendTo -Value (Get-Content -Path $AppendFrom)
+Remove-Item $AppendFrom
 
 # #################################################
 # Rename files to be what the vendor expects
 # #################################################
 
 foreach($file in $CSVGetFiles) {
-    Rename-Item -Path $($file.MSSName) -NewName $($file.VendorName)
+    if ($file.VendorName.Length -gt 0) {
+        Rename-Item -Path $($file.MSSName) -NewName $($file.VendorName)
+    }
 }
-
-
 
 # #################################################
 # Send files to vendor
@@ -95,9 +115,12 @@ foreach($file in $CSVGetFiles) {
 
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost -password=$VendorSFTPPassword -hostkey=$VendorSFTPHostKey"
+
 foreach($file in $CSVGetFiles) {
-    $SFTPCommands += "RM $($file.VendorName)"
-    $SFTPCommands += "PUT $($file.VendorName)"
+    if ($file.VendorName.Length -gt 0) {
+        $SFTPCommands += "RM $($file.VendorName)"
+        $SFTPCommands += "PUT $($file.VendorName)"
+    }
 }
 $SFTPCommands += "BYE"
 
@@ -122,7 +145,6 @@ Foreach-Object {
 # #################################################
 # Finished
 # #################################################
-
 
 write-host "Done"
 set-location $OrigLocation
