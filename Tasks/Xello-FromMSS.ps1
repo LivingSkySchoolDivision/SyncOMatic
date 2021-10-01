@@ -14,10 +14,6 @@ $CSVGetFiles = @(
     @{ 
         MSSName = "Xello-Student.txt"
         VendorName = "Student.txt"
-    },
-    @{ 
-        MSSName = "Xello-CourseCodes.txt"
-        VendorName = "CourseCodes.txt"
     }
 )
 
@@ -63,8 +59,6 @@ $VendorSFTPHostKey = $configXml.Settings.Xello.SFTPHostKey
 
 # Should probably check to make sure all these things have values...
 
-
-
 $OrigLocation = Get-Location
 set-location $ActualScratchPath
 
@@ -76,7 +70,7 @@ $SFTPCommands = @()
 $SFTPCommands += "OPEN $MSSSFTPUser@$MSSSFTPHost -privatekey=$MSSSFTPPrivateKeyPath -hostkey=$MSSSFTPHostKey"
 foreach($file in $CSVGetFiles) {
     $SFTPCommands += "GET $($file.MSSName)"
-    #$SFTPCommands += "RM $($file.MSSName)"
+    $SFTPCommands += "RM $($file.MSSName)"
 }
 $SFTPCommands += "BYE"
 
@@ -102,7 +96,7 @@ foreach($file in $CSVGetFiles) {
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost -password=$VendorSFTPPassword -hostkey=$VendorSFTPHostKey"
 foreach($file in $CSVGetFiles) {
-    #$SFTPCommands += "RM $($file.VendorName)"
+    $SFTPCommands += "RM $($file.VendorName)"
     $SFTPCommands += "PUT $($file.VendorName)"
 }
 $SFTPCommands += "BYE"
