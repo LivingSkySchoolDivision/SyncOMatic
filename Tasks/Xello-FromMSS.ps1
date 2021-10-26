@@ -33,9 +33,22 @@ $CSVGetFiles = @(
 $AppendTo = "Xello-StudentCourses-InProgress.txt"
 $AppendFrom = "Xello-StudentCourses-History.txt"
 
+# #################################################
+# Ensure that necesary folders exist
+# #################################################
+
 $ActualScratchPath = $(Resolve-Path $ScratchDirectory)
 $ActualLogPath = $(Resolve-Path $LogDirectory)
 $ActualConfigFilePath = $(Resolve-Path $ConfigFile)
+
+if ((test-path -Path $ActualScratchPath) -eq $false) {
+    New-Item -Path $ActualScratchPath -ItemType Directory
+}
+
+if ((test-path -Path $ActualLogPath) -eq $false) {
+    New-Item -Path $ActualLogPath -ItemType Directory
+}
+
 
 # #################################################
 # Functions
