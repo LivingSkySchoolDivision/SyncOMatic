@@ -21,18 +21,17 @@ $CSVGetFiles = @(
 # Ensure that necesary folders exist
 # #################################################
 
+if ((test-path -Path $ScratchDirectory) -eq $false) {
+    New-Item -Path $ScratchDirectory -ItemType Directory
+}
+
+if ((test-path -Path $LogDirectory) -eq $false) {
+    New-Item -Path $LogDirectory -ItemType Directory
+}
+
 $ActualScratchPath = $(Resolve-Path $ScratchDirectory)
 $ActualLogPath = $(Resolve-Path $LogDirectory)
 $ActualConfigFilePath = $(Resolve-Path $ConfigFile)
-
-if ((test-path -Path $ActualScratchPath) -eq $false) {
-    New-Item -Path $ActualScratchPath -ItemType Directory
-}
-
-if ((test-path -Path $ActualLogPath) -eq $false) {
-    New-Item -Path $ActualLogPath -ItemType Directory
-}
-
 
 # #################################################
 # Functions
