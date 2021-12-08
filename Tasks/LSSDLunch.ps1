@@ -72,6 +72,7 @@ $LSSDLunchSchoolFilter = $configXml.Settings.LSSDLunch.LSSDLunchFilterSchools
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $SFTPUser@$SFTPHost -privatekey=$SFTPPrivateKeyPath -hostkey=$SFTPHostKey"
 $SFTPCommands += "GET $MSSExportFilename"
+$SFTPCommands += "RM $MSSExportFilename"
 $SFTPCommands += "BYE"
 
 $OrigLocation = Get-Location

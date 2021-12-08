@@ -74,6 +74,7 @@ $SFTPCommands = @()
 $SFTPCommands += "OPEN $SFTPUser@$SFTPHost -privatekey=$SFTPPrivateKeyPath -hostkey=$SFTPHostKey"
 foreach($file in $CSVGetFiles) {
     $SFTPCommands += "GET $file"
+    $SFTPCommands += "RM $file"
 }
 $SFTPCommands += "BYE"
 
