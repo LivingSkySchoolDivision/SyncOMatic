@@ -43,6 +43,12 @@
         <FacilityFile></FacilityFile>
         <ConfigFile></ConfigFile>
     </Identity>
+    <LSSDLunch>
+        <LSSDLunchConfigFile></LSSDLunchConfigFile>
+        <LSSDLunchRootPath></LSSDLunchRootPath>
+        <LSSDLunchEXEName></LSSDLunchEXEName>
+        <LSSDLunchFilterSchools></LSSDLunchFilterSchools>
+    </LSSDLunch>
     <WebHookURL></WebHookURL>
     <LogFilePassword></LogFilePassword>
 </Settings>
