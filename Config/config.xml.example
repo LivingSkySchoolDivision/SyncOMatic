@@ -4,6 +4,13 @@
     Ensure that you set permissions on this file or folder so that only your service account(s) can access it.
 -->
 <Settings>
+    <EdsbyLink>
+        <EdsbyLinkRootPath></EdsbyLinkRootPath>
+        <EdsbyLinkURL></EdsbyLinkURL>
+        <EdsbyLinkSchool></EdsbyLinkSchool>
+        <EdsbyLinkPassword></EdsbyLinkPassword>
+        <EdsbyLinkUserID></EdsbyLinkUserID>
+    </EdsbyLink>
     <MySchoolSask>
         <SFTPHost></SFTPHost>
         <SFTPUser></SFTPUser>
@@ -51,4 +58,6 @@
     </LSSDLunch>
     <WebHookURL></WebHookURL>
     <LogFilePassword></LogFilePassword>
+    <PythonExecutable></PythonExecutable>
+    <UtilitiesScriptsRoot></UtilitiesScriptsRoot>
 </Settings>
