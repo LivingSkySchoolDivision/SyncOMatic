@@ -56,6 +56,11 @@
         <LSSDLunchEXEName></LSSDLunchEXEName>
         <LSSDLunchFilterSchools></LSSDLunchFilterSchools>
     </LSSDLunch>
+    <Insignia>
+        <SFTPHost></SFTPHost>
+        <SFTPUser></SFTPUser>
+        <SFTPPassword></SFTPPassword>
+    </Insignia>
     <WebHookURL></WebHookURL>
     <LogFilePassword></LogFilePassword>
     <PythonExecutable></PythonExecutable>
