@@ -10,12 +10,10 @@ param (
 # #################################################
  
 $JobName = "SchoolMessenger-AddressBook"
-$CSVGetFiles = @(
-    @{ 
-        MSSName = "SchoolMessenger-Addressbook.csv"
-        VendorName = "LSKYSDAddressbook.csv"
-    }
-)
+
+$StudentDemoFilename = "SchoolMessenger-Multipart-Students.csv"
+$StudentContactFilename = "SchoolMessenger-Multipart-Contacts.csv"
+$FinalVendorFilename = "LSKYSDAddressbook.csv"
 
 # #################################################
 # Ensure that necesary folders exist
@@ -67,6 +65,7 @@ $VendorSFTPHost = $configXml.Settings.SchoolMessenger.SFTPHost
 $VendorSFTPUser = $configXml.Settings.SchoolMessenger.SFTPUser
 $VendorSFTPPassword = $configXml.Settings.SchoolMessenger.SFTPPassword
 $VendorSFTPHostKey = $configXml.Settings.SchoolMessenger.SFTPHostKey
+$UtilitiesScriptsRoot = $configXml.Settings.UtilitiesScriptsRoot
 
 # Should probably check to make sure all these things have values...
 
@@ -81,10 +80,11 @@ set-location $ActualScratchPath
 
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $MSSSFTPUser@$MSSSFTPHost -privatekey=$MSSSFTPPrivateKeyPath -hostkey=$MSSSFTPHostKey"
-foreach($file in $CSVGetFiles) {
-    $SFTPCommands += "GET $($file.MSSName)"
-    $SFTPCommands += "RM $($file.MSSName)"
-}
+
+$SFTPCommands += "GET $($StudentDemoFilename)"
+$SFTPCommands += "GET $($StudentContactFilename)"
+$SFTPCommands += "RM $($StudentDemoFilename)"
+$SFTPCommands += "RM $($StudentContactFilename)"
 $SFTPCommands += "BYE"
 
 
@@ -93,12 +93,18 @@ $WinSCPLogFile = Join-Path $ActualScratchPath "winscp-mss.log"
 
 
 # #################################################
-# Rename files to be what the vendor expects
+# Process files into single file
 # #################################################
 
-foreach($file in $CSVGetFiles) {
-    Rename-Item -Path $($file.MSSName) -NewName $($file.VendorName)
-}
+$ProcessLogFile = (Join-Path $ActualScratchPath ("SchoolMessenger-Combine.log"))
+$CombineCommandParams = @(
+    '-InputDemographicFileName', $StudentDemoFilename,
+    '-InputContactsFileName', $StudentContactFilename,
+    '-OutputFileName', $FinalVendorFilename
+);
+
+. powershell.exe -Command $UtilitiesScriptsRoot/SchoolMessenger-Combine-Multipart.ps1 $CombineCommandParams > $ProcessLogFile
+
 
 # #################################################
 # Send files to vendor
@@ -106,13 +112,12 @@ foreach($file in $CSVGetFiles) {
 
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost -password=$VendorSFTPPassword -hostkey=$VendorSFTPHostKey"
-foreach($file in $CSVGetFiles) {
-    $SFTPCommands += "PUT $($file.VendorName)"
-}
+$SFTPCommands += "PUT $($FinalVendorFilename)"
 $SFTPCommands += "BYE"
 
 $WinSCPLogFile = Join-Path $ActualScratchPath "winscp-vendor.log"
 . $WinSCPPath/winscp.com  /command $SFTPCommands /log="$WinSCPLogFile" /loglevel=0
+
 
 # #################################################
 # Clean up scratch directory

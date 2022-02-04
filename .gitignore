@@ -1,6 +1,7 @@
 # Ignore any config files that are already set up
 config.xml
 *config.xml
+testfile*
 
 # Ignore any CSV files that might have accidentally found their way here
 *.csv
