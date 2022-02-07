@@ -99,6 +99,7 @@ foreach($file in $CSVGetFiles) {
 
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost -password=$VendorSFTPPassword -hostkey=$VendorSFTPHostKey"
+$SFTPCommands += "CD Data"
 foreach($file in $CSVGetFiles) {
     $SFTPCommands += "PUT $($file.VendorName)"
 }
