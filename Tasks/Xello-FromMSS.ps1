@@ -127,7 +127,7 @@ foreach($file in $CSVGetFiles) {
 
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost -password=$VendorSFTPPassword -hostkey=$VendorSFTPHostKey"
-
+$SFTPCommands += "option batch continue"
 foreach($file in $CSVGetFiles) {
     if ($file.VendorName.Length -gt 0) {
         $SFTPCommands += "RM $($file.VendorName)"
