@@ -112,6 +112,13 @@ Add-Content -Path $AppendTo -Value (Get-Content -Path $AppendFrom)
 Remove-Item $AppendFrom
 
 # #################################################
+# The above section will screw up line endings for 
+# half the file, so lets fix that
+# #################################################
+
+(Get-Content -Raw -Path $AppendTo) -replace '\r\n','`n' | Set-Content -Path $AppendTo
+
+# #################################################
 # Rename files to be what the vendor expects
 # #################################################
 
