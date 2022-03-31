@@ -31,6 +31,8 @@ if ((test-path -Path $LogDirectory) -eq $false) {
 $ActualScratchPath = $(Resolve-Path $ScratchDirectory)
 $ActualLogPath = $(Resolve-Path $LogDirectory)
 $ActualConfigFilePath = $(Resolve-Path $ConfigFile)
+
+
 # #################################################
 # Functions
 # #################################################
@@ -64,6 +66,7 @@ $LogFilePassword = $configXml.Settings.LogFilePassword
 $VendorSFTPHost = $configXml.Settings.Insignia.SFTPHost
 $VendorSFTPUser = $configXml.Settings.Insignia.SFTPUser
 $VendorSFTPPassword = $configXml.Settings.Insignia.SFTPPassword
+$UtilitiesScriptsRoot = $configXml.Settings.UtilitiesScriptsRoot
 
 $OrigLocation = Get-Location
 set-location $ActualScratchPath
@@ -84,13 +87,13 @@ $SFTPCommands += "BYE"
 $WinSCPLogFile = Join-Path $ActualScratchPath "winscp-mss.log"
 . $WinSCPPath/winscp.com  /command $SFTPCommands /log="$WinSCPLogFile" /loglevel=0
 
-
 # #################################################
-# Rename files to be what the vendor expects
+# Process the file to fix data issues, and also
+# rename files to be what the vendor expects
 # #################################################
 
 foreach($file in $CSVGetFiles) {
-    Rename-Item -Path $($file.MSSName) -NewName $($file.VendorName)
+    . powershell.exe -Command $UtilitiesScriptsRoot/Insignia-Process.ps1 -InputFileName $($file.MSSName) -OutputFileName $($file.VendorName)    
 }
 
 # #################################################
