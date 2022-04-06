@@ -116,7 +116,7 @@ Remove-Item $AppendFrom
 # half the file, so lets fix that
 # #################################################
 
-(Get-Content -Raw -Path $AppendTo) -replace '\r\n','`n' | Set-Content -Path $AppendTo
+(Get-Content -Raw -Path $AppendTo) -replace '\r\n',"`n" | Set-Content -Path $AppendTo
 
 # #################################################
 # Rename files to be what the vendor expects
