@@ -61,6 +61,12 @@
         <SFTPUser></SFTPUser>
         <SFTPPassword></SFTPPassword>
     </Insignia>
+    <SchoolCash>
+        <SFTPHost></SFTPHost>
+        <SFTPPort></SFTPPort>
+        <SFTPUser></SFTPUser>
+        <SFTPPassword></SFTPPassword>
+    </SchoolCash>
     <WebHookURL></WebHookURL>
     <LogFilePassword></LogFilePassword>
     <PythonExecutable></PythonExecutable>
