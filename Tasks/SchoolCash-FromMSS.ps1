@@ -73,10 +73,10 @@ $MSSSFTPHostKey = $configXml.Settings.MySchoolSask.SFTPHostKey
 $WinSCPPath = $configXml.Settings.Utilities.WinSCPPath
 $SevenZipPath = $configXml.Settings.Utilities.SevenZipPath
 $LogFilePassword = $configXml.Settings.LogFilePassword
-$VendorSFTPHost = $configXml.Settings.Clevr.SFTPHost
-$VendorSFTPUser = $configXml.Settings.Clevr.SFTPUser
-$VendorSFTPPassword = $configXml.Settings.Clevr.SFTPPassword
-$VendorSFTPHostKey = $configXml.Settings.Clevr.SFTPHostKey
+$VendorSFTPHost = $configXml.Settings.SchoolCash.SFTPHost
+$VendorSFTPPort = $configXml.Settings.SchoolCash.SFTPPort
+$VendorSFTPUser = $configXml.Settings.SchoolCash.SFTPUser
+$VendorSFTPPassword = $configXml.Settings.SchoolCash.SFTPPassword
 
 # Should probably check to make sure all these things have values...
 
@@ -115,7 +115,7 @@ foreach($file in $CSVGetFiles) {
 # #################################################
 
 $SFTPCommands = @()
-$SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost -password=$VendorSFTPPassword  -hostkey=$VendorSFTPHostKey"
+$SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost`:$VendorSFTPPort -password=$VendorSFTPPassword"
 foreach($file in $CSVGetFiles) {
     #$SFTPCommands += "CD $($file.VendorFolderName)"
     $SFTPCommands += "PUT $($file.VendorName)"
