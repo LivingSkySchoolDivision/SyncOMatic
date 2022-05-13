@@ -9,22 +9,20 @@ param (
 # File names for FTP transactions
 # #################################################
  
+# They don't want the staff file at the same time, so
+# if we're uploading it, it needs to go in a separate job
+
 $JobName = "SchoolCash"
 $CSVGetFiles = @(
     @{ 
         MSSName = "LSSD-SchoolCash-Staff.txt"
-        VendorName = "Mass_YourDistrictName_Students.txt"
-        VendorFolderName= "Student"
+        VendorName = "Mass_LSSD_Students.txt"
+        #VendorFolderName= "Student"
     },
     @{ 
         MSSName = "LSSD-SchoolCash-StudentSchedules.txt"
-        VendorName = "Mass_YourDistrictName_Scheduling.txt"
-        VendorFolderName= "Scheduling"
-    },
-    @{ 
-        MSSName = "LSSD-SchoolCash-Staff.txt"
-        VendorName = "Staff_YourDistrictName_Students.txt"
-        VendorFolderName= "Student"
+        VendorName = "Mass_LSSD_Scheduling.txt"
+        #VendorFolderName= "Scheduling"
     }
 )
 
@@ -119,7 +117,9 @@ foreach($file in $CSVGetFiles) {
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost -password=$VendorSFTPPassword  -hostkey=$VendorSFTPHostKey"
 foreach($file in $CSVGetFiles) {
+    #$SFTPCommands += "CD $($file.VendorFolderName)"
     $SFTPCommands += "PUT $($file.VendorName)"
+    #$SFTPCommands += "CD .."
 }
 $SFTPCommands += "BYE"
 
@@ -144,7 +144,6 @@ Foreach-Object {
 # #################################################
 # Finished
 # #################################################
-
 
 write-host "Done"
 set-location $OrigLocation
