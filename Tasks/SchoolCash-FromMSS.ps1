@@ -4,7 +4,6 @@ param (
     [Parameter(Mandatory=$true)][string]$LogDirectory
  )
 
-
 # #################################################
 # File names for FTP transactions
 # #################################################
@@ -15,13 +14,18 @@ param (
 $JobName = "SchoolCash"
 $CSVGetFiles = @(
     @{ 
-        MSSName = "LSSD-SchoolCash-Staff.txt"
+        MSSName = "SchoolCash_Students.txt"
         VendorName = "Mass_LSSD_Students.txt"
         #VendorFolderName= "Student"
     },
     @{ 
-        MSSName = "LSSD-SchoolCash-StudentSchedules.txt"
+        MSSName = "SchoolCash_StudentSchedules.txt"
         VendorName = "Mass_LSSD_Scheduling.txt"
+        #VendorFolderName= "Student"
+    },
+    @{ 
+        MSSName = "SchoolCash_Staff.txt"
+        VendorName = "Mass_LSSD_Staff.txt"
         #VendorFolderName= "Scheduling"
     }
 )
