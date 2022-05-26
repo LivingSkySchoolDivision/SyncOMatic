@@ -16,17 +16,12 @@ $CSVGetFiles = @(
     @{ 
         MSSName = "SchoolCash_Students.txt"
         VendorName = "Mass_LSSD_Students.txt"
-        #VendorFolderName= "Student"
+        VendorFolderName= "Student"
     },
     @{ 
         MSSName = "SchoolCash_StudentSchedules.txt"
         VendorName = "Mass_LSSD_Scheduling.txt"
-        #VendorFolderName= "Student"
-    },
-    @{ 
-        MSSName = "SchoolCash_Staff.txt"
-        VendorName = "Mass_LSSD_Staff.txt"
-        #VendorFolderName= "Scheduling"
+        VendorFolderName= "Scheduling"
     }
 )
 
@@ -121,9 +116,9 @@ foreach($file in $CSVGetFiles) {
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost`:$VendorSFTPPort -password=$VendorSFTPPassword"
 foreach($file in $CSVGetFiles) {
-    #$SFTPCommands += "CD $($file.VendorFolderName)"
+    $SFTPCommands += "CD $($file.VendorFolderName)"
     $SFTPCommands += "PUT $($file.VendorName)"
-    #$SFTPCommands += "CD .."
+    $SFTPCommands += "CD .."
 }
 $SFTPCommands += "BYE"
 
