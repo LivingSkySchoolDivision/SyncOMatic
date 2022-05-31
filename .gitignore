@@ -10,3 +10,8 @@ testfile*
 *.key
 *.ppk
 *.7z
+
+Logs/*
+!Logs/.placeholder
+Scratch/*
+!Scratch/.placeholder
