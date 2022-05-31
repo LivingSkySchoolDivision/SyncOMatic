@@ -23,6 +23,7 @@ if ((test-path -Path $LogDirectory) -eq $false) {
     New-Item -Path $LogDirectory -ItemType Directory
 }
 
+$OrigLocation = Get-Location
 $ActualScratchPath = $(Resolve-Path $ScratchDirectory)
 $ActualLogPath = $(Resolve-Path $LogDirectory)
 $ActualConfigFilePath = $(Resolve-Path $ConfigFile)
