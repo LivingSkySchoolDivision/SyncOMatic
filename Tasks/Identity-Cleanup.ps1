@@ -52,8 +52,9 @@ if ((test-path -Path $ActualConfigFilePath) -eq $false) {
 
 $configXML = [xml](Get-Content $ActualConfigFilePath)
 $IdentityScriptsRootPath = $configXml.Settings.Identity.IdentityScriptsRootPath
-$IdentityFacilityFile = $configXml.Settings.Identity.FacilityFile
 $IdentityConfigFile = $configXml.Settings.Identity.ConfigFile
+$SevenZipPath = $configXml.Settings.Utilities.SevenZipPath
+$LogFilePassword = $configXml.Settings.LogFilePassword
 
 # Should probably check to make sure all these things have values...
 
@@ -61,9 +62,22 @@ $IdentityConfigFile = $configXml.Settings.Identity.ConfigFile
 # Run import scripts
 # #################################################
 
-foreach($InputFile in $CSVGetFiles) {    
-    . $IdentityScriptsRootPath/Tasks/Cleanup.ps1 -ConfigFile $IdentityConfigFile -LogFilePath $ActualScratchPath
-}
+. $IdentityScriptsRootPath/Tasks/Cleanup.ps1 -ConfigFile $IdentityConfigFile -LogFilePath $ActualScratchPath
+
+# #################################################
+# Clean up scratch directory
+# #################################################
+
+$todayLogFileName = Join-Path $ActualLogPath "$(Get-FullTimeStamp)-$($JobName).7z"
+. $SevenZipPath/7za.exe a -t7z $todayLogFileName -mx9 "-p$LogFilePassword" "$ActualScratchPath/*.*" -xr!".placeholder"
+
+# Clear the rest of the scratch folder
+Get-ChildItem $ActualScratchPath |
+Foreach-Object {
+    if ($_.Name -ne ".placeholder") {
+        Remove-Item $_.FullName
+    }
+} 
 
 # #################################################
 # Finished
