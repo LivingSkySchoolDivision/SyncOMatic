@@ -18,7 +18,6 @@ if ((Test-Path $OutputFileName) -eq $true)
 }
 
 # Read in input file
-
 write-host "Loading input file..."
 $InputFile = import-csv $InputFileName -Delimiter "`t"
 
@@ -27,14 +26,20 @@ foreach($Line in $InputFile)
 {
     $ThisRow = [PSCustomObject]@{
         "Building ID" = $Line."Building ID"
-        "Last Name" = $Line."Last Name"
-        "First Name" = $Line."First Name"
-        "Middle Name" = $Line."Middle Name"
+        "Last Name" = $Line."Last Name".Trim()
+        "First Name" = $Line."First Name".Trim()
+        "Middle Name" = $Line."Middle Name".Trim()
         "Student ID" = $Line."Student ID"
-        "Grade" = $Line."Grade"
-        "Gender" = $Line."Gender"
-        "Homeroom" = $Line."Homeroom"
-        "Email" = $Line."Email"
+        "Grade" = $Line."Grade".Trim()
+        "Gender" = $Line."Gender".Trim()
+        "Homeroom" = $Line."Homeroom".Trim()
+        "Email" = $Line."Email".Trim()
+        "Address" = $Line."Address".Trim()
+        "Address_2" = $Line."Address_2".Trim()
+        "City" = $Line."City".Trim()
+        "Province" = $Line."Province".Trim()
+        "Country" = $Line."Country".Trim()
+        "PostalCode" = $Line."PostalCode".Trim()
     }
     $CSVLines += $ThisRow
 }
@@ -43,8 +48,20 @@ foreach($Line in $InputFile)
 write-host "Processing..."
 foreach($Line in $CSVLines)
 {
+    # If there is no homeroom, put the grade in instead
     if ($Line."Homeroom" -eq "") {
         $Line."Homeroom" = $Line."Grade"
+    }
+
+    # Condense address lines into a single field
+    # In MSS, address lines are not what you expect
+    # Line 2 is used for PO boxes, line 1 is used for street addresses
+    # So we need to combine these into a single field
+    # Looking at how our schools use these fields, some students will have values in both, so
+    # if addr2 is present, we should always use that.
+
+    if ($Line."Address_2" -ne "") {
+        $Line."Address" = $Line."Address_2"
     }
 }
 
