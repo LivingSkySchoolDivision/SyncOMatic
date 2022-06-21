@@ -73,12 +73,12 @@ $writer = New-Object System.IO.StreamWriter($file)
 # Use write instead of writeline so we can control the line endings better
 
 # Writer header row
-$writer.Write("Building ID`tLast Name`tFirst Name`tMiddle Name`tStudent ID`tGrade`tGender`tHomeroom`tEmail`n")
+$writer.Write("Building ID`tLast Name`tFirst Name`tMiddle Name`tStudent ID`tGrade`tGender`tHomeroom`tEmail`tAddress`tCity`tProvince`tCountry`tPostalCode`n")
 
 # Write values
 foreach($Line in $CSVLines)
 {
-    $writer.Write("$($Line.'Building ID')`t$($Line.'Last Name')`t$($Line.'First Name')`t$($Line.'Middle Name')`t$($Line.'Student ID')`t$($Line.'Grade')`t$($Line.'Gender')`t$($Line.'Homeroom')`t$($Line.'Email')`n")
+    $writer.Write("$($Line.'Building ID')`t$($Line.'Last Name')`t$($Line.'First Name')`t$($Line.'Middle Name')`t$($Line.'Student ID')`t$($Line.'Grade')`t$($Line.'Gender')`t$($Line.'Homeroom')`t$($Line.'Email')`t$($Line.'Address')`t$($Line.'City')`t$($Line.'Province')`t$($Line.'Country')`t$($Line.'PostalCode')`n")
 }
 
 $writer.Close()
