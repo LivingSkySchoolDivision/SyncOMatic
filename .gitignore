@@ -2,6 +2,7 @@
 config.xml
 *config.xml
 testfile*
+Config/*.xml
 
 # Ignore any CSV files that might have accidentally found their way here
 *.csv
