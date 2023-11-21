@@ -16,14 +16,18 @@ param (
  
 $JobName = "IE-EDUFORMS"
 $CSVGetFiles = @(
-    @{ 
-        MSSName = "ie-eduforms-staff.csv"
-        VendorName = "Staff.csv"
-    },
-    @{ 
-        MSSName = "ie-eduforms-speced.csv"
-        VendorName = "SpecEd.csv"
-    },
+#    @{ 
+#        MSSName = "ie-eduforms-staff.csv"
+#        VendorName = "Staff.csv"
+#    },
+#    @{ 
+#        MSSName = "ie-eduforms-PASI.csv"
+#        VendorName = "PASI_DATA.csv"
+#    },
+#    @{ 
+#        MSSName = "ie-eduforms-speced.csv"
+#        VendorName = "SpecEd.csv"
+#    },
     @{ 
         MSSName = "ie-eduforms-schools.csv"
         VendorName = "Schools.csv"
@@ -47,10 +51,6 @@ $CSVGetFiles = @(
     @{ 
         MSSName = "ie-eduforms-enrolments.csv"
         VendorName = "Enrolments.csv"
-    },
-    @{ 
-        MSSName = "ie-eduforms-PASI.csv"
-        VendorName = "PASI_DATA.csv"
     },
     @{ 
         MSSName = "ie-eduforms-stuguardiancustody.csv"
