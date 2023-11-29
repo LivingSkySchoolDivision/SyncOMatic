@@ -1,0 +1,31 @@
+name: NotifyToTeams
+
+on:
+  push:
+    branches: [ master, main ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+
+      - name: Notify teams channel on success
+        if: ${{ success() }}
+        uses: jdcargile/ms-teams-notification@v1.3
+        with:
+            github-token: ${{ github.token }}
+            ms-teams-webhook-uri: ${{ secrets.MSTEAMS_WEBHOOK }}
+            notification-summary: "👷‍♂️ IoC Repository ${{ github.repository }} was just modified 👷‍♂️"
+            notification-color: 009900
+            timezone: America/Regina
