@@ -16,6 +16,7 @@
         <SFTPUser></SFTPUser>
         <SFTPPrivateKeyPath></SFTPPrivateKeyPath>
         <SFTPHostKey></SFTPHostKey>
+        <ReportingDatabaseConnectionString></ReportingDatabaseConnectionString>
     </MySchoolSask>
     <SchoolMessenger>
         <SFTPHost></SFTPHost>
