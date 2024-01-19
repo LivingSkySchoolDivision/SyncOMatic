@@ -37,7 +37,24 @@ $connection = New-Object System.Data.SqlClient.SqlConnection($SQLConnectionStrin
 $command = New-Object System.Data.SqlClient.SqlCommand($SQLQuery, $connection)
 $adapter = New-Object System.Data.SqlClient.SqlDataAdapter($command)
 $dataset = New-Object System.Data.DataSet
-$adapter.Fill($dataset) | Out-Null
+
+$retryCount = 0
+$maxRetries = 5
+$retryDelay = 30
+
+while ($retryCount -lt $maxRetries) {
+    try {
+        $adapter.Fill($dataset) | Out-Null
+        break
+    } catch {
+        $retryCount++
+        if ($retryCount -eq $maxRetries) {
+            throw "Failed to execute SQL query after $maxRetries attempts."
+        }
+        Write-Host "Exception occurred. Retrying in $retryDelay seconds..."
+        Start-Sleep -Seconds $retryDelay
+    }
+}
 
 # #################################################
 # Process the query results
