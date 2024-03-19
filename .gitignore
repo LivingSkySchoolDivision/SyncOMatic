@@ -12,6 +12,8 @@ Config/*.xml
 *.ppk
 *.7z
 
+test.ps1
+
 Logs/*
 !Logs/.placeholder
 Scratch/*
