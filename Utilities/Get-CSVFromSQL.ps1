@@ -54,6 +54,8 @@ $dataset = New-Object System.Data.DataSet
 $retryCount = 0
 $maxRetries = 5
 $retryDelay = 60
+$anysuccess = $false
+$lastError = ""
 
 LogThis "Max retries is $maxRetries. Retry delay is $retryDelay seconds."
 LogThis "Running query..."
@@ -61,6 +63,7 @@ LogThis "Running query..."
 while ($retryCount -lt $maxRetries) {
     try {
         $adapter.Fill($dataset) | Out-Null
+        $anysuccess = $true
         break
     } catch {
         $retryCount++
@@ -69,10 +72,17 @@ while ($retryCount -lt $maxRetries) {
         }
         LogThis "Exception occurred."
         LogThis $_
+        $lastError = $_
         LogThis "Retrying in $retryDelay seconds..."
         Start-Sleep -Seconds $retryDelay
     }
-} 
+}
+
+if ($anysuccess -eq $false) {
+    LogThis "Failed to execute SQL query after $maxRetries attempts."
+    throw "Failed to execute SQL query after $maxRetries attempts. $($lastError)"
+    exit -1
+}
 
 LogThis "Finished running query."
 
