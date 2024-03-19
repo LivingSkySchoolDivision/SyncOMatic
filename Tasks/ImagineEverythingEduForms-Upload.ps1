@@ -4,10 +4,15 @@ param (
     [Parameter(Mandatory=$true)][string]$LogDirectory
  )
 
+# #################################################
+# PREREQUISITES FOR THIS SCRIPT!!!!
+# #################################################
+
 # This script requires Amazon S3 powershell. How to install:
 #  See: https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up-windows.html#ps-installing-awstools
-#  Install-Module -Name AWS.Tools.Installer -Force -AllowClobber
-#  Install-AWSToolsModule AWS.Tools.S3 -CleanUp -Force -SkipPublisherCheck
+#  Install-Module -Name AWS.Tools.Installer -Force -AllowClobber -SkipPublisherCheck -Scope AllUsers
+#  Install-AWSToolsModule AWS.Tools.S3 -CleanUp -Force -SkipPublisherCheck -Scope allUsers
+#  NOTE: The "-Scope AllUsers" does not seem to work - you may need to log in as the service account that you use for this script and install it manually.
 
 $JobName = "IE-EDUFORMS"
 
@@ -249,7 +254,7 @@ try {
         }
         catch {
             $file.Uploaded = $false
-            file.UploadError = $_
+            $file.UploadError = $_
             LogThis "Error uploading file $($file.VendorName) to S3: $_"
         }
     }
@@ -317,10 +322,10 @@ if (-not [string]::IsNullOrEmpty($WebHookURL))
     {
         if ($file.RetrieveSuccess -eq $false)
         {
-            $WebHookBody += '{ "name": "' + $($file.VendorName) + '", "value": "&#x1F6A8; Failed to retrieve file from MSS.\n' + $($file.RetrieveError) + '" },'
+            $WebHookBody += '{ "name": "' + $($file.VendorName) + '", "value": "&#x1F6A8; **Failed to retrieve file from MSS**.\n' + $($file.RetrieveError) + '" },'
         } elseif ($file.Uploaded -eq $false)
         {
-            $WebHookBody += '{ "name": "' + $($file.VendorName) + '", "value": "&#x1F6A9; Failed to upload to vendor.\n' + $($file.UploadError) + '" },'
+            $WebHookBody += '{ "name": "' + $($file.VendorName) + '", "value": "&#x1F6A9; **Failed to upload to vendor**.\n' + $($file.UploadError) + '" },'
         } else {
             $WebHookBody += '{ "name": "' + $($file.VendorName) + '", "value": "'
             $WebHookBody += "**Size:** $($file.size), **SHA256:** $($file.hash)"
