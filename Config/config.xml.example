@@ -67,6 +67,7 @@
         <SFTPPort></SFTPPort>
         <SFTPUser></SFTPUser>
         <SFTPPassword></SFTPPassword>
+        <SFTPHostKey></SFTPHostKey>  
     </SchoolCash>  
     <ImagineEverythingEduForms>
         <S3BucketAccessKey></S3BucketAccessKey>
