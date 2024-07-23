@@ -30,12 +30,6 @@
         <SFTPPassword></SFTPPassword>
         <SFTPHostKey></SFTPHostKey>
     </Clever>
-    <Clevr>
-        <SFTPHost></SFTPHost>
-        <SFTPUser></SFTPUser>
-        <SFTPPassword></SFTPPassword>
-        <SFTPHostKey></SFTPHostKey>
-    </Clevr>
     <Xello>
         <SFTPHost></SFTPHost>
         <SFTPUser></SFTPUser>
