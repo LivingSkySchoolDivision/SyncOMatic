@@ -66,6 +66,7 @@ $LogFilePassword = $configXml.Settings.LogFilePassword
 $VendorSFTPHost = $configXml.Settings.Insignia.SFTPHost
 $VendorSFTPUser = $configXml.Settings.Insignia.SFTPUser
 $VendorSFTPPassword = $configXml.Settings.Insignia.SFTPPassword
+$VendorSFTPHostKey = $configXml.Settings.Insignia.SFTPHostKey
 $UtilitiesScriptsRoot = $configXml.Settings.UtilitiesScriptsRoot
 
 $OrigLocation = Get-Location

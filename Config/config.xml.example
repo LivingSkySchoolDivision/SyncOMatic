@@ -55,6 +55,7 @@
         <SFTPHost></SFTPHost>
         <SFTPUser></SFTPUser>
         <SFTPPassword></SFTPPassword>
+        <SFTPHostKey></SFTPHostKey>    
     </Insignia>
     <SchoolCash>
         <SFTPHost></SFTPHost>
