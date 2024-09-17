@@ -97,12 +97,11 @@ $WinSCPLogFile = Join-Path $ActualScratchPath "winscp-mss.log"
 . $WinSCPPath/winscp.com  /command $SFTPCommands /log="$WinSCPLogFile" /loglevel=0
 
 # #################################################
-# Process the file to fix data issues, and also
-# rename files to be what the vendor expects
+# Rename files to be what the vendor expects
 # #################################################
 
 foreach($file in $CSVGetFiles) {
-    . powershell.exe -Command $UtilitiesScriptsRoot/Insignia-Process.ps1 -InputFileName $($file.MSSName) -OutputFileName $($file.VendorName)    
+    Rename-Item -Path $($file.MSSName) -NewName $($file.VendorName)
 }
 
 # #################################################
