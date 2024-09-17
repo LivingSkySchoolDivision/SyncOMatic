@@ -57,6 +57,12 @@
         <SFTPPassword></SFTPPassword>
         <SFTPHostKey></SFTPHostKey>    
     </Insignia>
+    <MyBlueprint>
+        <SFTPHost></SFTPHost>
+        <SFTPUser></SFTPUser>
+        <SFTPPassword></SFTPPassword>
+        <SFTPHostKey></SFTPHostKey>    
+    </MyBlueprint>
     <SchoolCash>
         <SFTPHost></SFTPHost>
         <SFTPPort></SFTPPort>
