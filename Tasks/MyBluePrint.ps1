@@ -86,7 +86,6 @@ set-location $ActualScratchPath
 
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $MSSSFTPUser@$MSSSFTPHost -privatekey=$MSSSFTPPrivateKeyPath -hostkey=$MSSSFTPHostKey"
-$SFTPCommands += "CD files"
 foreach($file in $CSVGetFiles) {
     $SFTPCommands += "GET $($file.MSSName)"
     $SFTPCommands += "RM $($file.MSSName)"
@@ -112,7 +111,7 @@ foreach($file in $CSVGetFiles) {
 
 $SFTPCommands = @()
 $SFTPCommands += "OPEN $VendorSFTPUser@$VendorSFTPHost -password=$VendorSFTPPassword -hostkey=$VendorSFTPHostKey"
-$SFTPCommands += "CD Data"
+$SFTPCommands += "CD Files"
 foreach($file in $CSVGetFiles) {
     $SFTPCommands += "PUT $($file.VendorName)"
 }
